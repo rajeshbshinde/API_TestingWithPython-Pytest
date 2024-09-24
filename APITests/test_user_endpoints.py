@@ -2,8 +2,8 @@
 Here, we are going to use https://reqres.in sample server to run different requests methods.
 You can find more details on https://reqres.in/ .
 
-Command to run all tests: pytest -vs Test\test_requests.py
-Command to run all tests and generate pytest html report: pytest -vs --capture sys Test\test_requests.py --html=report.html
+Command to run all tests: pytest -vs APITests\test_requests.py
+Command to run all tests and generate pytest html report: pytest -vs --capture sys APITests\test_requests.py --html=report.html
 """
 
 import json
