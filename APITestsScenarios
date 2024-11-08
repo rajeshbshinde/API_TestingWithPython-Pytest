@@ -1,0 +1,149 @@
+API Test Scenarios:
+
+1.    Verify the API response code for a valid request.
+2.    Verify the API response code for an invalid request.
+3.    Verify the API response time for a valid request.
+4.    Verify the API response time for an invalid request.
+5.    Verify the API response message for a valid request.
+6.    Verify the API response message for an invalid request.
+7.    Verify the API response content for a valid request.
+8.    Verify the API response content for an invalid request.
+9.    Verify the API response format for a valid request.
+10.  Verify the API response format for an invalid request.
+11.  Verify the API response size for a valid request.
+12.  Verify the API response size for an invalid request.
+13.  Verify the API response headers for a valid request.
+14.  Verify the API response headers for an invalid request.
+15.  Verify the API request method for a valid request.
+16.  Verify the API request method for an invalid request.
+17.  Verify the API request parameters for a valid request.
+18.  Verify the API request parameters for an invalid request.
+19.  Verify the API request payload for a valid request.
+20.  Verify the API request payload for an invalid request.
+21.  Verify the API authentication for a valid request.
+22.  Verify the API authentication for an invalid request.
+23.  Verify the API authorization for a valid request.
+24.  Verify the API authorization for an invalid request.
+25.  Verify the API rate limiting for a valid request.
+26.  Verify the API rate limiting for an invalid request.
+27.  Verify the API error handling for a valid request.
+28.  Verify the API error handling for an invalid request.
+29.  Verify the API security for a valid request.
+30.  Verify the API security for an invalid request.
+31.  Verify the API response time under high load.
+32.  Verify the API response time under low load.
+33.  Verify the API response for edge cases (empty, null, negative values, etc.).
+34.  Verify the API response when input is out of range.
+35.  Verify the API response when input is invalid.
+36.  Verify the API response when required fields are missing.
+37.  Verify the API response when optional fields are missing.
+38.  Verify the API response when the input is too long.
+39.  Verify the API response when input is too short.
+40.  Verify the API response when input contains special characters.
+41.  Verify the API response when input contains non-ASCII characters.
+42.  Verify the API response when input is case-sensitive.
+43.  Verify the API response when input is case-insensitive.
+44.  Verify the API response when input contains HTML or JavaScript tags.
+45.  Verify the API response when input contains SQL injection.
+46.  Verify the API response when input contains a cross-site scripting (XSS).
+47.  Verify the API response when input contains malware or viruses.
+48.  Verify the API response when input contains sensitive information
+
+Important Scenarios for REST API Testing
+REST (Representational State Transfer) APIs are widely used in modern web services for communication between client and server. Testing these APIs is crucial for ensuring the robustness, performance, and security of the application. Here are some key scenarios you should cover when performing REST API testing:
+
+1. Validation of HTTP Methods
+REST APIs use standard HTTP methods to interact with resources. Each method should be tested for its intended behavior:
+* GET: Retrieves data from the server. Ensure that:
+    * The correct data is returned for a given request.
+    * The status code is 200 OK for valid requests and 404 Not Found for invalid resources.
+    * Data is not modified.
+* POST: Submits new data to the server. Ensure that:
+    * Data is correctly added, and the response code is 201 Created.
+    * Handle duplicate submissions gracefully (e.g., return 409 Conflict for duplicate data).
+    * Validate request body and parameters.
+* PUT: Updates existing resources. Ensure that:
+    * The resource is updated with the correct data.
+    * The response code is 200 OK or 204 No Content.
+    * Validation occurs for updating non-existing resources (return 404 Not Found).
+* DELETE: Deletes a resource. Ensure that:
+    * The resource is deleted correctly.
+    * The status code 200 OK or 204 No Content is returned for a valid resource.
+    * Deleting a non-existing resource returns a 404 Not Found.
+
+2. Status Code Validation
+Validate that the API returns the correct HTTP status codes in different situations:
+* 200 OK: For successful GET requests or updates.
+* 201 Created: For successful POST requests.
+* 204 No Content: For successful DELETE requests where no data is returned.
+* 400 Bad Request: For invalid input or malformed requests.
+* 401 Unauthorized: For requests that require authentication and it’s missing or incorrect.
+* 403 Forbidden: For requests where the user is authenticated but doesn’t have the right permissions.
+* 404 Not Found: For resources that don’t exist.
+* 500 Internal Server Error: For unexpected errors on the server side.
+
+3. Response Data Validation
+Ensure that the API returns correct and meaningful responses. This includes:
+* Correct Data Format: Ensure the response is in the expected format (e.g., JSON, XML).
+* Field Validation: Validate that all required fields are present in the response, and no additional/unexpected fields are returned.
+* Data Integrity: Verify that the data returned matches what is stored in the database (especially after performing CRUD operations).
+* Response Structure: Ensure that the structure of the response is consistent across the API.
+* Empty Responses: For scenarios like fetching data from an empty database, ensure a proper response like an empty array or 204 No Content.
+
+4. Input Parameter Validation
+Test how the API handles different types of input:
+* Valid Parameters: Ensure that valid inputs return the expected results.
+* Invalid Parameters: Send invalid, malformed, or missing parameters and verify that the API returns appropriate error messages (e.g., 400 Bad Request).
+* Boundary Conditions: Test with minimum and maximum limits for inputs, especially for numeric fields or string lengths.
+* Special Characters: Ensure that the API handles special characters in inputs properly (e.g., SQL injection, XSS).
+* Optional vs Required Parameters: Verify the behavior when required parameters are missing and that optional parameters are handled correctly.
+
+5. Authentication and Authorization
+Ensure proper security mechanisms are in place:
+* Authentication Testing:
+    * Test access to the API with and without valid authentication tokens (JWT, OAuth, etc.).
+    * Ensure that endpoints requiring authentication respond with 401 Unauthorized if the token is missing or invalid.
+    * Check for expired tokens and ensure proper responses.
+* Authorization Testing:
+    * Ensure that users with different roles or permissions can only access allowed resources.
+    * Verify that unauthorized access attempts return 403 Forbidden.
+
+6. Rate Limiting and Throttling
+Test the API’s ability to handle high volumes of requests:
+* Rate Limiting: Test if the API enforces rate limits (e.g., number of requests per minute). After reaching the limit, ensure the API responds with 429 Too Many Requests.
+* Throttling: Verify how the API behaves when it's flooded with requests, ensuring that it continues to work without crashing.
+
+7. Error Handling
+Ensure that the API handles errors gracefully:
+* Meaningful Error Messages: Check that the API provides descriptive error messages for invalid requests.
+* Consistent Error Format: Ensure that all error responses follow a consistent format (e.g., all errors return JSON with fields like message, error code, status).
+* Server-Side Errors: For any 5xx errors (e.g., 500 Internal Server Error), ensure proper logging is in place and that meaningful feedback is returned to the client.
+
+8. Security Testing
+Testing the API for vulnerabilities is essential:
+* SQL Injection: Ensure the API is protected against SQL injection attacks by testing with malicious input in fields that interact with the database.
+* Cross-Site Scripting (XSS): Check that the API properly sanitizes input and output to avoid XSS vulnerabilities.
+* Session Hijacking: Ensure session tokens are securely managed (e.g., expiration, renewal) and cannot be reused.
+* Data Encryption: Test whether sensitive data (e.g., passwords, tokens) is being transmitted over secure channels (SSL/TLS).
+
+9. Performance Testing
+Evaluate the API’s response under various load conditions:
+* Response Time: Measure how quickly the API responds to requests under normal conditions.
+* Load Testing: Simulate heavy traffic to test how the API performs under load (e.g., multiple concurrent users or large amounts of data).
+* Stress Testing: Push the API to its limits to see how it handles extreme load, ensuring graceful degradation instead of crashes.
+
+10. Data Consistency Testing
+Test the consistency of the data in various scenarios:
+* State Changes: Verify that when data is modified via POST, PUT, or DELETE requests, the changes reflect correctly in subsequent GET requests.
+* Concurrency Testing: Test how the API handles simultaneous requests, ensuring no race conditions or data corruption.
+* Data Synchronization: For distributed or replicated systems, ensure that data remains consistent across different instances.
+
+11. Testing for API Documentation Accuracy
+Ensure that the API behaves as described in the documentation:
+* Swagger/OpenAPI Validation: If the API uses a tool like Swagger, validate that the API documentation matches the actual behavior.
+* API Contracts: Check that the input parameters, expected responses, and status codes in the documentation are accurate.
+
+12. Versioning
+Test how the API handles different versions:
+* Backward Compatibility: Ensure that newer versions of the API don’t break functionality for users on older versions.
+* Versioning Strategy: Test different versions of the API (e.g., /v1/users and /v2/users) to ensure they work as expected.
